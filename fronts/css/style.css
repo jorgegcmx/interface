@@ -1,0 +1,151 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900|Open+Sans:300,400,600,700');
+
+/* === prettify === */
+@import url('../js/google-code-prettify/prettify.css');
+/* === fontawesome === */
+@import url('font-awesome.css');
+/* === custom icon === */
+@import url('custom-fonts.css');
+/* ==== overwrite bootstrap standard ==== */
+@import url('theme.css');
+@import url('animate.css');
+
+#enlaces:focus-within {
+  overflow: visible;
+  width: auto;
+  height: auto;
+  background: #003366;
+}
+
+#enlaces {
+
+  overflow: hidden;
+ width: 0;
+ height: 0;
+}
+
+
+/* ===============================
+1. Encabezado
+================================ */
+
+header .top {
+	padding:20px 0;
+	margin:0;
+	background: #FFF;
+	width:78%;
+  margin:15px auto;
+
+}
+
+/* ===============================
+2. TEXTOS
+================================ */
+
+.Titulo { 
+  text-align:center ; 
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 2.5em;
+  color: #003366;
+
+}
+
+#SaltaMP{ 
+  color:#FFF;
+  font-weight: bold;
+}
+
+#SaltaSI{ 
+  color:#FFF;
+  font-weight: bold;
+}
+
+#alumno{ 
+  color:#FFF;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+#profesor{ 
+  color:#FFF;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+#administrador{ 
+  color:#FFF;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* ===============================
+3. Menu De usuarios
+================================ */
+
+.mainnav {
+
+  background-color: #003366 ;
+  border: black 1px solid;
+  width:88%;
+  margin:45px auto;
+  text-align: right;
+}
+
+#menu {
+  overflow: visible;
+}
+
+.div {
+  display: block;
+}
+
+.screen-reader-text {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+h2{
+  margin: 0;
+  background-color: #BDCED6;
+   display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+h2:before {
+  content: "> ";
+}
+
+/* ===============================
+4. TEXTO DE IMAGENES e IMAGENES
+================================ */
+.main-slider .flex-caption { bottom: 35px; background-color: rgba(0, 0, 0, 0.6); color: #fff; margin: 0; padding: 25px 25px 25px 30px; position: absolute; right: 0; width: 295px;}
+
+.main-slider.flexslider { 
+ margin: 10px 0 50px; background: transparent; border: none;
+ -webkit-border-radius: 0; -moz-border-radius: 0; -o-border-radius: 0; border-radius: 0; -webkit-box-shadow: none; -moz-box-shadow: none; 
+ -o-box-shadow: none;
+ box-shadow: none;
+}
+
+img{
+
+  width:400px; 
+  height:370px;
+
+
+}
+
+
+
+

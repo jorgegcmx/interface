@@ -1,0 +1,24 @@
+ul.menuu {
+  clear: both;
+  float: left;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.menuu li {
+   float: left;
+}
+
+
+ul.menuu li a {
+  padding: .3em;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  background: #F4F4F4;
+  border-top: 1px solid #7C7C7C;
+  border-right: 1px solid #7C7C7C;
+  border-bottom: 1px solid #9C9C9C;
+}
