@@ -108,8 +108,7 @@ include_once '../menu/menu.php';
 								<div class="form-group">							
 									<input type="hidden" name="diasdeclase" class="form-control" required value="<?php  if(isset($id)){echo  $fila->diasdeclase;}else{ echo "0";} ?>">
 								</div>
-								<div class="form-group">
-									<label></label>
+								<div class="form-group">								
 									<input type="hidden" name="nummaterias" class="form-control" required value="<?php  if(isset($id)){echo  $fila->totalmaterias;}else{echo "1";} ?>">
 								</div>
 								<div class="form-group">

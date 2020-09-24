@@ -959,6 +959,9 @@ h1.page-header {
 	margin:auto;
 }
 
+label{
+	text-transform: uppercase;	
+}
 
 
 
