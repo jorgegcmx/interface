@@ -18,7 +18,7 @@ class Classe
     {
         try {
             
-            $sql = "UPDATE users SET password = ? WHERE nombre =? ";                 
+            $sql = "UPDATE users SET password = ? WHERE md5(nombre) =? ";                 
             
             $consulta = $this->con->prepare($sql);
             $consulta->bindparam(1, $password);
@@ -38,7 +38,7 @@ class Classe
     {
         try {
             
-            $sql = "UPDATE profesores SET password = ? WHERE emailp =? ";                 
+            $sql = "UPDATE profesores SET password = ? WHERE md5(emailp) =? ";                 
             
             $consulta = $this->con->prepare($sql);
             $consulta->bindparam(1, $password);
@@ -57,7 +57,7 @@ class Classe
     {
         try {
             
-            $sql = "UPDATE alumnos SET password = ? WHERE email =? ";                 
+            $sql = "UPDATE alumnos SET password = ? WHERE md5(email) =? ";                 
             
             $consulta = $this->con->prepare($sql);
             $consulta->bindparam(1, $password);

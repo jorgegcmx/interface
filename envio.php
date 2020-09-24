@@ -1,5 +1,5 @@
 <?php
-$dominio="http://localhost:8090";
+$dominio="http://unidadeducativaclaudioneiragarzon.esy.es";
 
 include_once 'Classe.php';
 $usu1 = new Classe();
@@ -38,7 +38,7 @@ if (isset($_POST['btnfiltrar'])) {
     }
 
 if($email!=''){
-	$contenido = $dominio."/updatepassword.php?email=". $email;
+	$contenido = $dominio."/updatepassword.php?email=".md5($email);
     mail($email, "clic en el siguiente enlace para restabecer la contraseña", $contenido);
 
     echo '<script type="text/javascript">
