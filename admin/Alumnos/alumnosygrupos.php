@@ -12,7 +12,7 @@ if (isset($_POST['id'])) {
     $id = null;
 }
 
-$che = $usu1->comprobarche($alumnos_idalumnos, $grupos_idgrupos);
+/*$che = $usu1->comprobarche($alumnos_idalumnos, $grupos_idgrupos);
 
 if ($che == true) {
 
@@ -32,7 +32,7 @@ alert("El Alumno ya Curso anteriormente el Grupo");
 			     alert(" Error el Alumno ya fue registrado en un Grupo con el mismo Periodo Escolar");
 				 setTimeout("window.history.go(-1)",100);
 				 </script>';
-        } else {
+        } else {*/
 
             if ($periodo == false) {
 
@@ -58,8 +58,8 @@ alert("El Alumno ya Curso anteriormente el Grupo");
                 }
             }
 
-        }
+  /*      }
 
     }
 
-}
+}*/

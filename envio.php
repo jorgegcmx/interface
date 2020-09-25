@@ -1,5 +1,5 @@
 <?php
-$dominio="http://unidadeducativaclaudioneiragarzon.esy.es";
+$dominio="http://unidadeducativaclaudioneiragarzon.esy.es/";
 
 include_once 'Classe.php';
 $usu1 = new Classe();
@@ -7,7 +7,7 @@ $usu2 = new Classe();
 $usu3 = new Classe();
 
 if (isset($_POST['btnfiltrar'])) {
-    $correo = $_POST['correo'];
+    $correo = trim($_POST['correo']);
 
     $datos = $usu1->get_admin($correo);
     /*Si es administrador */
@@ -21,7 +21,7 @@ if (isset($_POST['btnfiltrar'])) {
 				
             } else {
                 while ($alum = $datos_alum->fetchObject()) {
-                    $email = $alum->emailp;
+                    $email = $alum->email;
                 }
             }
 
@@ -38,18 +38,10 @@ if (isset($_POST['btnfiltrar'])) {
     }
 
 if($email!=''){
-	$contenido = $dominio."/updatepassword.php?email=".md5($email);
+	$contenido = $dominio."updatepassword.php?email=".md5($email);
     mail($email, "clic en el siguiente enlace para restabecer la contraseña", $contenido);
-
-    echo '<script type="text/javascript">
-			     alert("Se ha enviado un email, para restablecer tu contraseña");
-				 window.location.href="index.php";
-				 </script>';
+          header("Location:formrecuperar.php?ok");     
 }else{
-	echo '<script type="text/javascript">
-	alert("Error el email no esta registrado en el sistema!");
-	setTimeout("window.history.go(-1)",100);
-	</script>';
-}
-   
+	header("Location:formrecuperar.php?error");   
+}   
 }

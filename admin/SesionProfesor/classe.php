@@ -53,14 +53,15 @@ if($consulta->rowCount() == 1){
     {
         try
         {
-    $sql = " select * from grupos
+    $sql = " select distinct alumnos.*,grupos.* from grupos
   	join alumnos_tiene_grupos on alumnos_tiene_grupos.grupos_idgrupos=grupos.idgrupos
 	join alumnos on alumnos.idalumnos=alumnos_tiene_grupos.alumnos_idalumnos
-    join periodosescolares on periodosescolares.idperiodos= alumnos_tiene_grupos.periodosescolares_idperiodos where idgrupos
-	LIKE '%$idgrupos' and stus='1'";
+    join periodosescolares on periodosescolares.idperiodos= alumnos_tiene_grupos.periodosescolares_idperiodos 
+     where idgrupos
+	 = ? and stus='1'";
         
         $consulta = $this->con->prepare($sql);
-     $consulta->bindParam(1, $iten);
+     $consulta->bindParam(1, $idgrupos);
     
      $consulta->execute();
 
@@ -125,6 +126,26 @@ if($consulta->rowCount() == 1){
         }catch(PDOExeption $e){
             print "Error:" . $e->getmessage();
         }
+  }
+
+  public function get_periodos()
+  {
+      try
+      {
+          $sql = "SELECT * FROM periodosescolares where stus=1";
+
+          $consulta = $this->con->prepare($sql);
+
+          $consulta->execute();
+
+          if ($consulta->rowCount() > 0) {
+              return $consulta;
+          } else {
+              return false;
+          } //fin else
+      } catch (PDOExeption $e) {
+          print "Error:" . $e->getmessage();
+      }
   }
 	
 }//cierra clase

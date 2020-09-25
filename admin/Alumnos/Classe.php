@@ -90,16 +90,15 @@ class Classe
     {
         try
         {
-            $sql = "  SELECT * FROM alumnos 
+            $sql = "  SELECT DISTINCT alumnos.*,grupos.*,tipodegrupo.* FROM alumnos 
             LEFT JOIN estatus on estatus.idestatus=alumnos.estatus_idestatus 
             LEFT JOIN tipodegrupo on tipodegrupo.idtipodegrupo=alumnos.id_tipo_alumno
             LEFT JOIN alumnos_tiene_grupos on alumnos_tiene_grupos.alumnos_idalumnos=alumnos.idalumnos
             LEFT JOIN grupos on grupos.idgrupos=alumnos_tiene_grupos.grupos_idgrupos
-            ";
+          ";
 
             if ($id != null) {
-                $sql .= " WHERE id_tipo_alumno =?";
-
+                $sql .= " WHERE id_tipo_alumno =? ";
             }
 
             $consulta = $this->con->prepare($sql);

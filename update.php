@@ -1,3 +1,5 @@
+
+
 <?php
 include_once 'Classe.php';
 $usu1 = new Classe();
@@ -19,6 +21,7 @@ if (isset($_POST['id'])) {
         echo '<script type="text/javascript">
         alert("Error las contraseñas no conciden, intenta nuevamente!");
         setTimeout("window.history.go(-1)",100);
-        </script>';
-    }
+        </script>'; 
+        }
 }
+?>

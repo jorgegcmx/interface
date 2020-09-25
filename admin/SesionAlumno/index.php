@@ -5,12 +5,12 @@ if(!isset($_SESSION['matricula'])){
   header("Location:../../index.php");
 }
 
-include_once 'classe.php';
-$usu1 = new classe();
+//include_once 'classe.php';
+//$usu1 = new classe();
 
 $matricula=	$_SESSION['idalumnos'];
 
-$datos=$usu1->get_b($matricula);
+//$datos=$usu1->get_b($matricula);
 
 ?>
 <!DOCTYPE html>
@@ -34,8 +34,7 @@ function printlayer(layer)
 {
 	var generator = window.open(",'name,");
 	var layertext = document.getElementById(layer);
-	generator.document.write(layertext.innerHTML.replace("Print Me"));
-	
+	generator.document.write(layertext.innerHTML.replace("Print Me"));	
 	generator.document.close();
 	generator.print();
 	generator.close();
@@ -73,17 +72,13 @@ function printlayer(layer)
 	<br>
     <br>
     <div class="form-group">
-			<img class="logo" src="../../front/img/logo.png"></img>			
-	        
+			<img class="logo" src="../../front/img/logo.png"></img>			        
 	 </div>
 	 <div align="center">
 	 <input type="button" value="Imprimir" class="btn btn-primary" onclick="window.print()">
-     </div>	 
-	 
-	</div><!--/.sidebar-->
-		
+     </div>		 
+	</div><!--/.sidebar-->		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">		
-
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">					
@@ -93,90 +88,164 @@ function printlayer(layer)
 					</h3>
 					  <h3>
 					   Alumno:<?php echo $_SESSION['nombrealumno'];?>
-			    	</h3>
+			    	</h3>			
 
-			
-<table table data-toggle="table">
+   <?php
+   include_once 'CalsseCalificaciones.php';
+   $ciclo = new CalsseCalificaciones();
+   $cicl=$ciclo->get_ciclo($matricula);
+   while($ci = $cicl->fetchObject()){ 
+        
+     $ci->idperiodos;
+    echo "<h4>".$ci->periodoescolar." DEL AÑO ".$ci->anio."</h4>";
+
+    $grupo = new CalsseCalificaciones();
+    $grup=$grupo->get_grupo($matricula,$ci->idperiodos);
+    while($g = $grup->fetchObject()){  
+    ?>
+    <table class="table">
     <tr>
     <th></th>
     <th></th>
     </tr>
-   <?php
-   include_once 'CalsseCalificaciones.php';
-   $grupo = new CalsseCalificaciones();
-   $grup=$grupo->get_grupo($matricula);
-   while($g = $grup->fetchObject()){  
-  ?>
-  <tr>
+    <tr>
     <td> <b><?php echo $g->grupo;  ?></b> </td>
-    <td>
-         <table table data-toggle="table">
+             <td>
+              <table class="table">
               <?php
-              include_once 'CalsseCalificaciones.php';
+            
               $usu1 = new CalsseCalificaciones();
               $datos=$usu1->get_buscali($matricula,$g->idgrupos);  
               ?>
-              <tr>
-                <th>Materias</th>
+                <!---------------------------------HEADER DE LA TABLA------------------------------------->
+                   <tr>
+                     <th>ASIGNATURAS</th>
                    <?php  
                       $parcial = new CalsseCalificaciones();
                       $par=$parcial->get_parcial(null);
                        while($p = $par->fetchObject()){  
                       ?>
-                <th style="text-align:center;"><?php echo $p->parcialcol; ?></th>
+                       <th style="text-align:center;"><?php echo $p->parcialcol; ?></th>
                       <?php  } ?>
-                <th>Final</th>
-               </tr>
+
+                     <th style="text-align:center;">PROMEDIO 80%</th>
+
+                     <?php 
+                      $examen = new CalsseCalificaciones();
+                      $exa=$examen->get_examen(null);
+                       while($e = $exa->fetchObject()){  
+                      ?>
+                       <th style="text-align:center;"><?php echo $e->parcialcol; ?></th>
+                      <?php  } ?>     
+
+                      <th style="text-align:center;">PROMEDIO EXAMEN 20%</th>
+                      <th style="text-align:center;">PROMEDIO</th>
+                     </tr>
+                     <!----------------------------------------------------------------------------------->
+                     <!---------------------------------DETALLE------------------------------------->
                       <?php
                         while($fila = $datos->fetchObject()){
                       ?>
                      <tr>
-                     <td><?php echo "$fila->materia";  ?></td>
-
+                     <td><?php echo $fila->materia;  ?></td>
                      <?php 
                      $parcia = new CalsseCalificaciones();
                      $pa=$parcia->get_parcial(null);
                      while($pu = $pa->fetchObject()){
-                                       
-                     ?>
-                     <td style="text-align:center;">
-				       <?php
-                       $pu->idparcial;
-                       $fila->idmaterias;
-                       $uno=0;
-                       $dos=0;
-                       $tres=0;
-                       $final=0;
+                       ?>
+                       <?php if( $pu->idparcial==1){  ?>                     
+                       <td style="text-align:center; font-weight:bold;">
+				               <?php                       
                        $calificacion = new CalsseCalificaciones(); 
-                       $cali=$calificacion->get_calificacion( $fila->idmaterias,$pu->idparcial,$fila->alumnos_idalumnos);	 
+                       $cali=$calificacion->get_calificacion( $fila->idmaterias,$pu->idparcial,$fila->alumnos_idalumnos,$ci->idperiodos);	 
                         while($c = $cali->fetchObject()){
                         echo $c->calificacion;
                          } ?>
-                     </td>
+                        </td>
+                       <?php   }  ?>
+                       <?php if( $pu->idparcial==2){  ?>                     
+                       <td style="text-align:center; font-weight:bold;">
+				               <?php                       
+                       $calificacion = new CalsseCalificaciones(); 
+                       $cali=$calificacion->get_calificacion( $fila->idmaterias,$pu->idparcial,$fila->alumnos_idalumnos,$ci->idperiodos);	 
+                        while($c = $cali->fetchObject()){
+                        echo $c->calificacion;
+                         } ?>
+                        </td>
 
-                          <?php
+                       <?php   }  ?>
+                       <?php if( $pu->idparcial==3){  ?>                     
+                       <td style="text-align:center; font-weight:bold;">
+				               <?php                      
+                        $calificacion = new CalsseCalificaciones(); 
+                        $cali=$calificacion->get_calificacion( $fila->idmaterias,$pu->idparcial,$fila->alumnos_idalumnos,$ci->idperiodos);	 
+                        while($c = $cali->fetchObject()){
+                        echo $c->calificacion;
+                         } ?>
+                        </td>
+                        <?php   }  ?>
+                       
+                         <?php
                              } 
-                           ?>
-     <td>
-     <?php
-     $final= new CalsseCalificaciones(); 
-     $fin=$final->get_final( $fila->idmaterias,$fila->alumnos_idalumnos,$g->idgrupos);	 
-      while($fi = $fin->fetchObject()){  
-      echo number_format($fi->finall/3);                       
-      } 	
-     ?>
-     </td>
-      </tr>
-        <?php
+                          ?>
+                         <td style="text-align:center; font-weight:bold;">
+                         <?php
+                         $PROMEDIOpARCIAL=0;
+                         $final= new CalsseCalificaciones(); 
+                         $fin=$final->get_final( $fila->idmaterias,$fila->alumnos_idalumnos,$g->idgrupos,$ci->idperiodos);	 
+                          while($fi = $fin->fetchObject()){  
+                            echo  $PROMEDIOpARCIAL= round($fi->finall, 2);                       
+                          } 	
+                         ?>
+                         </td>
+
+                         <?php
+                         $examen = new CalsseCalificaciones();
+                         $exa=$examen->get_examen(null);
+                          while($e = $exa->fetchObject()){  
+                         ?>
+                          <td style="text-align:center; font-weight:bold;">
+                           
+                           <?php  
+                            $EXAMEN=0;                          
+                            $calificacion = new CalsseCalificaciones(); 
+                            $cali=$calificacion->get_calificacion( $fila->idmaterias,$e->idparcial,$fila->alumnos_idalumnos,$ci->idperiodos);	 
+                            while($c = $cali->fetchObject()){
+                            echo $c->calificacion;
+                            $EXAMEN=$c->calificacion;
+                             }
+                           
+                           ?>                          
+                          </td>
+
+                          <td style="text-align:center; font-weight:bold;">                           
+                           <?php                            
+                             echo $EXAMEN*0.20;                           
+                           ?>                          
+                          </td>
+
+                          <td style="text-align:center; font-weight:bold;">                           
+                           <?php                            
+                             echo ($EXAMEN*0.20+ $PROMEDIOpARCIAL  )                        
+                           ?>                          
+                          </td>
+                        <?php  } ?>                       
+
+                   </tr>
+                          <!----------------------------------------------------------------------------------->
+           <?php
           }
         ?>
       </table>
     </td>
   </tr>
+  </table>
   <?php
     }
    ?>
-</table>
+<?php   }   ?>
+   
+
 	</div>
 	</div>
 	</div>
