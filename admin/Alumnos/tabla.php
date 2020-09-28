@@ -212,6 +212,11 @@ if (isset($_GET['id'])) {
                                                 <span><a href="borrar.php?id=<?php echo $fila->idalumnos; ?>" class="btn btn-danger btn-xs ask" id="confirmacion" ><i class="fa fa-trash-o"></i > Borrar</a></span>
                                             </div>
 
+                                            <div class="card-view">
+                                                <span class="title" style=""></span>
+                                                <span><a href="notas.php?id=<?php echo $fila->idalumnos; ?>&matricula=<?php echo $fila->matricula; ?>&nombre=<?php echo $fila->nombrealumno.''. $fila->apellidosalumno; ?>" class="btn btn-info btn-xs" ><i class="fa fa-eye"></i > Notas</a></span>
+                                            </div>
+
                                         </td>
                                     </tr>
                                     <?php

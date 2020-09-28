@@ -1,13 +1,12 @@
-
 <?php
 session_start();
-if(!isset($_SESSION['matricula'])){
-  header("Location:../../index.php");}
-
+if (!isset($_SESSION['login'])) {
+    header("Location:../../index.php");
+}
 //include_once 'classe.php';
 //$usu1 = new classe();
 
-$matricula=	$_SESSION['idalumnos'];
+$matricula=	$_GET['id'];
 //$datos=$usu1->get_b($matricula);
 
 ?>
@@ -29,8 +28,7 @@ $matricula=	$_SESSION['idalumnos'];
 
 
 <script>
-function printlayer(layer)
-{
+function printlayer(layer){
 	var generator = window.open(",'name,");
 	var layertext = document.getElementById(layer);
 	generator.document.write(layertext.innerHTML.replace("Print Me"));	
@@ -55,7 +53,7 @@ function printlayer(layer)
 				<a class="navbar-brand" href="../index.php">Unidad de Educación Especial "Claudio Neira Garzón</a>
 				<ul class="user-menu">
 				<li class="dropdown pull-right">
-				<a href="../../LoginAlumno/logout.php"><svg class="glyph stroked cancel"<?php echo $_SESSION['matricula']; ?>><use xlink:href="#stroked-cancel"></use></svg>Cerrar Sesion</a>
+                <a href="../../Login/logout.php"><svg class="glyph stroked cancel"<?php echo $_SESSION['login']; ?>><use xlink:href="#stroked-cancel"></use></svg>Cerrar Sesion</a>
 						<ul class="dropdown-menu" role="menu">							
 							<li></li>
 						</ul>
@@ -63,8 +61,7 @@ function printlayer(layer)
 				</ul>
 			</div>							
 		</div><!-- /.container-fluid -->
-	</nav>		
-
+	</nav>	
 	<!--div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 	<br>
     <br>
@@ -72,8 +69,7 @@ function printlayer(layer)
 			<img class="logo" src="../../front/img/logo.png"></img>			        
 	 </div>		 
 	</div-->
-  <!--/.sidebar-->	
-	
+  <!--/.sidebar-->		
 <!--div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main"-->	
   <div class="row">
 			<div class="col-lg-12">
@@ -82,8 +78,8 @@ function printlayer(layer)
              <div align="center">
 	            <button type="button" class="btn btn-info"  onclick="window.print()"><i class="fa fa-print" aria-hidden="true"></i> Imprimir Boleta</button>
             </div>
-                  <h4>	Matricula: <?php echo $_SESSION['matricula']; ?>  </h4>
-		              <h4> Alumno: <?php echo $_SESSION['nombrealumno'];?> <?php echo $_SESSION['apellidosalumno'];?> </h4>	
+                     <h4>	Matricula: <?php echo $_GET['matricula']; ?>  </h4>
+		              <h4> Alumno: <?php echo $_GET['nombre'];?> </h4>	
            </div>
         </div>
       </div>
@@ -100,7 +96,7 @@ function printlayer(layer)
    $Gene8=0;
    $Gene9=0;
    $Gene10=0;
-   include_once 'CalsseCalificaciones.php';
+   include_once '../SesionAlumno/CalsseCalificaciones.php';
    $ciclo = new CalsseCalificaciones();
    $cicl=$ciclo->get_ciclo($matricula);
    while($ci = $cicl->fetchObject()){ 
