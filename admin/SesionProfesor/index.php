@@ -175,13 +175,13 @@ if (isset($_GET['id']) and isset($_GET['grupo'])) {
                 </select>
               </div>
               <div class="form-group">
-                <label>Periodo Escolar</label>
+                <label>Selecciona el Quimestre</label>
                 <select name="periodosescolares_idperiodos" required class="form-control">
                   <option value=""></option>
                   <?php
-				 $estatus = new Classe();
-				 $filass = $estatus->get_periodos();
-				  while($data=$filass->fetchObject()){ ?>
+				              $estatus = new Classe();
+				              $filass = $estatus->get_periodos();
+				               while($data=$filass->fetchObject()){ ?>
                   <option value="<?php echo $data->idperiodos; ?>">
                     <?php echo "$data->periodoescolar"; echo "_$data->anio";?></option>
                   <?php } ?>

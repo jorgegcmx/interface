@@ -21,7 +21,7 @@ if(!isset($_SESSION['login'])){
 <link href="../css/datepicker3.css" rel="stylesheet">
 <link href="../css/bootstrap-table.css" rel="stylesheet">
 <link href="../css/styles.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <!--Icons-->
 <script src="../js/lumino.glyphs.js"></script>
 
@@ -101,7 +101,7 @@ include_once '../menu/menu.php';
             while($fila = $datos->fetchObject()){
             ?>			
 			<tr>
-			<td style="width:250px;"><?php echo $fila->nombrealumno; ?> <?php echo $fila->apellidosalumno; ?></td>
+			<td style="width:250px;"> <i class="fa fa-graduation-cap" aria-hidden="true"></i> <?php echo $fila->nombrealumno; ?>  <?php echo $fila->apellidosalumno; ?></td>
 		    </tr>
 			
 		     <?php

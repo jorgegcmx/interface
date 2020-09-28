@@ -82,7 +82,7 @@ include_once '../menu/menu.php';
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Abrir Nuevo Ciclo Escolar</h1>
+				<h1 class="page-header">Abrir Nuevo Quimestre</h1>
 			</div>
 		</div><!--/.row-->
 				
@@ -94,9 +94,9 @@ include_once '../menu/menu.php';
 					<div class="panel-body">
 						<div class="col-md-6">
 							<form role="form" method="POST" action="agregar.php"	>	
-<?php if(isset($id)){ echo "<input type='hidden' value='$fila->idperiodos' name='id'>"; }?>							
+                              <?php if(isset($id)){ echo "<input type='hidden' value='$fila->idperiodos' name='id'>"; }?>							
 								<div class="form-group">
-									<label>Ciclo Escolar</label>
+									<label>Quimestre</label>
 									<input type="text" name="periodoescolar" class="form-control" required value="<?php  if(isset($id)){echo  $fila->periodoescolar;} ?>">
 								</div>
 								<div class="form-group">
@@ -106,11 +106,7 @@ include_once '../menu/menu.php';
 								<div class="form-group">
 									<label>Estatus(1)=Abierto, es importante Cerrar el Ciclo anterior antes de abrir uno nuevo </label>
 									<input type="hidden"  name="stus" class="form-control" required value="1">
-								</div>
-																
-								
-								
-								
+								</div>							
 														
 								<button type="submit" class="btn btn-primary">Guardar</button>
 								

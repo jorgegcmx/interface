@@ -16,13 +16,13 @@ $datos = $usu1->get_p(null);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Periodos</title>
+<title>Quimestres</title>
 
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/datepicker3.css" rel="stylesheet">
 <link href="../css/bootstrap-table.css" rel="stylesheet">
 <link href="../css/styles.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <!--Icons-->
 <script src="../js/lumino.glyphs.js"></script>
 
@@ -75,7 +75,7 @@ include_once '../menu/menu.php';
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<a type="button" href="form.php" class="btn btn-primary">Nuevo Registro</a>
+				<a type="button" href="form.php" class="btn btn-primary">Nuevo Quimestre</a>
 			</div>
 		</div><!--/.row-->
 				
@@ -83,7 +83,7 @@ include_once '../menu/menu.php';
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading"> <h2>Ciclos Quimestrales</h2></div>
+					<div class="panel-heading"> <h2>Listado de Quimestres</h2></div>
 					<div class="panel-body">
 						<table data-toggle="table"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						    <thead>
@@ -101,7 +101,7 @@ include_once '../menu/menu.php';
                                         <td>
 										
 										<div class="card-view">
-												<span class="title" style="">Ciclo</span>
+												<span class="title" style="">Quimestre</span>
 												<span><?php echo $fila->periodoescolar; ?></span>
 										</div>
 										<div class="card-view">
@@ -115,11 +115,11 @@ include_once '../menu/menu.php';
 										</div>
 										<div class="card-view">
 												<span class="title" style=""></span>
-												<span><a href="formedit.php?id=<?php echo $fila->idperiodos; ?> " class="btn btn-info btn-xs"> <i class="fa fa-pencil"></i>Editar</a></span>
+												<span><a href="formedit.php?id=<?php echo $fila->idperiodos; ?> " class="btn btn-info btn-xs"> <i class="fa fa-pencil"></i> Editar</a></span>
 										</div>
 										<div class="card-view">
 												<span class="title" style=""></span>
-												<span><a href="borrar.php?id=<?php echo $fila->idperiodos; ?>" class="btn btn-danger btn-xs" ><i class="fa fa-trash-o"></i>Borrar</a></span>
+												<span><a href="borrar.php?id=<?php echo $fila->idperiodos; ?>" class="btn btn-danger btn-xs" id="confirmacion"><i class="fa fa-trash-o"></i> Borrar</a></span>
 										</div>
 									    </td>                                   
                                     </tr>
@@ -148,6 +148,7 @@ include_once '../menu/menu.php';
 	<script src="../js/easypiechart-data.js"></script>
 	<script src="../js/bootstrap-datepicker.js"></script>
 	<script src="../js/bootstrap-table.js"></script>
+	<script src="../js/confirm.js"></script>
 	<script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  

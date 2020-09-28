@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
 <link href="../css/datepicker3.css" rel="stylesheet">
 <link href="../css/bootstrap-table.css" rel="stylesheet">
 <link href="../css/styles.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <!--Icons-->
 <script src="../js/lumino.glyphs.js"></script>
 <!--[if lt IE 9]>
@@ -99,37 +99,62 @@ if (isset($_GET['id'])) {
 										<?php echo $fila->grupo; ?>
 									</a>
 									<div align="center">
-									<a href="form.php?id=<?php echo $fila->idgrupos; ?> ">Editar</a>
-									<a href="borrar.php?id=<?php echo $fila->idgrupos; ?>" >Borrar</a>
+									<a href="form.php?id=<?php echo $fila->idgrupos; ?> "><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+									<a href="borrar.php?id=<?php echo $fila->idgrupos; ?>"  id="confirmacion"> <i class="fa fa-trash" aria-hidden="true"></i></a>
 									</div>										
-									  <!--ALUMNO-->
+									  <!--Materias-->
                                      <div class="modal fade" id="<?php echo $fila->idgrupos; ?>" tabindex="-1" role="dialog" aria-labelledby="Alumno">
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">                                  
                                           <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                 aria-hidden="true">&times;</span></button>
-                                            <h4 align="center">
-											  <a  class="modal-title" style="color:black" >Materias/Profesor</a>
-											  <br>
-											  <a href="formmaterias.php?id=<?php echo $fila->idgrupos; ?>&idtipo=<?php echo $_GET['id'] ?>" class="btn btn-primary btn-xs" >+ Agregar materias y asignar profesor</a>
-											  <br>
-											  <a href="lista.php?idgrupo=<?php echo $fila->idgrupos; ?>&nombregrupo=<?php echo $fila->grupo; ?>" class="btn btn-primary btn-xs" >Alumnos registrados</a>
-                                            </h4>
+                                            <div align="center">											 
+											  <ul class="list-group">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <a  class="modal-title" style="color:black" >Materias/Profesor</a>    
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <a href="formmaterias.php?id=<?php echo $fila->idgrupos; ?>&idtipo=<?php echo $_GET['id'] ?>"  > Agregar materias y asignar profesor</a>
+                                                  <span class="badge badge-primary badge-pill"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <a href="lista.php?idgrupo=<?php echo $fila->idgrupos; ?>&nombregrupo=<?php echo $fila->grupo; ?>"  > Lista de alumnos registrados</a>
+                                                  <span class="badge badge-primary badge-pill"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                                </li>
+                                              </ul>											
+											</div>
                                           </div>
                                            <div class="modal-body">
-										          <?php
+
+                                                <table class="table">
+                                                 <thead>
+                                                   <tr>
+                                                     <th scope="col">Materias</th>
+                                                     <th scope="col">Imparte Profesor</th>
+													 <th></th>     
+                                                   </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                 <?php
                                                   $usu2 = new Classe();
                                                   $datoss = $usu2->get_mat_por_tipo($fila->idgrupos);
                                                    while ($filas = $datoss->fetchObject()) {
                                                   ?>
-												   <h6 align="center"> <b>Meteria :</b><?php echo $filas->materia; ?> / <b>Profesor :</b> <?php echo $filas->nombreprofesor; ?> <br>  </h6>
-													<?php }?>
+                                                   <tr>
+                                                     <td scope="row"> <?php echo $filas->materia; ?>  </td>
+                                                     <td><?php echo $filas->nombreprofesor; ?>  </td> 
+													 <td><a href="borrar_detalle_maetria_profesor.php?id=<?php echo $filas->iddetalle_p_m; ?>"  id="confirmacion"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>    
+                                                   </tr>
+                                               	<?php }?>
+                                               	</table>    
+												 
+												
                                             </div>
                                         </div>
                                       </div>
                                     </div>
-                                    <!--FIN ALUMNO-->
+                                    <!--Materias-->
 								</li>
 							  <?php }?>
 					        </ul>					 
@@ -149,6 +174,7 @@ if (isset($_GET['id'])) {
 	<script src="../js/easypiechart-data.js"></script>
 	<script src="../js/bootstrap-datepicker.js"></script>
 	<script src="../js/bootstrap-table.js"></script>
+	<script src="../js/confirm.js"></script>
 	<script>
 		!function ($) {
 		$(document).on("click","ul.nav li.parent > a > span.icon", function(){

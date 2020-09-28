@@ -28,6 +28,7 @@ $id=$_GET['id'];
 <link href="../css/datepicker3.css" rel="stylesheet">
 <link href="../css/bootstrap-table.css" rel="stylesheet">
 <link href="../css/styles.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <!--Icons-->
 <script src="../js/lumino.glyphs.js"></script>
@@ -140,12 +141,12 @@ include_once '../menu/menu.php';
 
 											<div class="card-view">
 												<span class="title" style=""></span>
-												<span><a href="form.php?id=<?php echo $fila->idprofesores; ?> " class="btn btn-info btn-xs"> <i class="fa fa-pencil"></i>Editar</a></span>
+												<span><a href="form.php?id=<?php echo $fila->idprofesores; ?> " class="btn btn-info btn-xs"> <i class="fa fa-pencil"></i> Editar</a></span>
 											</div>
 
 											<div class="card-view">
 												<span class="title" style=""></span>
-												<span><a href="borrar.php?id=<?php echo $fila->idprofesores; ?>" class="btn btn-danger btn-xs ask" ><i class="fa fa-trash-o"></i>Borrar</a></span>
+												<span><a href="borrar.php?id=<?php echo $fila->idprofesores; ?>" class="btn btn-danger btn-xs ask" id="confirmacion"><i class="fa fa-trash-o"></i> Borrar</a></span>
 											</div>
 										</td>
 									</tr>
@@ -174,6 +175,7 @@ include_once '../menu/menu.php';
 	<script src="../js/easypiechart-data.js"></script>
 	<script src="../js/bootstrap-datepicker.js"></script>
 	<script src="../js/bootstrap-table.js"></script>
+	<script src="../js/confirm.js"></script>
 	<script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  

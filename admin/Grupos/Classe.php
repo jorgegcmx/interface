@@ -136,6 +136,18 @@ class Classe
             print "Error: " . $e->getMessage();
         }
     }
+    public function del_mat_profesor($id)
+    {
+        try {
+            $sql = "DELETE FROM profesores_tiene_materias WHERE iddetalle_p_m = ?";
+            $consulta = $this->con->prepare($sql);
+            $consulta->bindParam(1, $id);
+            $consulta->execute();
+            $this->con = null;
+        } catch (PDOException $e) {
+            print "Error: " . $e->getMessage();
+        }
+    }
     public function get_tipo()
     {
         try
@@ -219,7 +231,7 @@ class Classe
     {
         try
         {
-            $sql = " SELECT * from alumnos
+            $sql = " SELECT distinct nombrealumno,apellidosalumno,grupos_idgrupos from alumnos
             join alumnos_tiene_grupos on alumnos_tiene_grupos.alumnos_idalumnos=alumnos.idalumnos
             where grupos_idgrupos = ?  ";
             $consulta = $this->con->prepare($sql);
