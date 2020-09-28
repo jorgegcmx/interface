@@ -43,6 +43,7 @@ class Usuario
                 $_SESSION['matricula'] = $fila['matricula'];
                 $_SESSION['idalumnos'] = $fila['idalumnos'];
                 $_SESSION['nombrealumno'] = $fila['nombrealumno'];
+                $_SESSION['apellidosalumno']=$fila['apellidosalumno'];
 
                 return true;
             } else {

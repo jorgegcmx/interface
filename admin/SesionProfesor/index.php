@@ -138,7 +138,7 @@ if (isset($_GET['id']) and isset($_GET['grupo'])) {
     echo "<option value''></option>";
     while ($filas = $alumno->fetchObject()) {
         $idgrupos = $filas->idgrupos;
-        echo "<option value='" . $filas->idalumnos . "'>" . $filas->nombrealumno . "</option>";
+        echo "<option value='" . $filas->idalumnos . "'>" . $filas->nombrealumno . " " . $filas->apellidosalumno . "</option>";
     }
     echo "<select>";
 	echo "</div>";

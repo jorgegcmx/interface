@@ -85,7 +85,7 @@ function printlayer(layer)
 	            <button type="button" class="btn btn-info"  onclick="window.print()"><i class="fa fa-print" aria-hidden="true"></i> Imprimir Boleta</button>
             </div>
                   <h4>	Matricula: <?php echo $_SESSION['matricula']; ?>  </h4>
-		              <h4> Alumno: <?php echo $_SESSION['nombrealumno'];?>  </h4>	
+		              <h4> Alumno: <?php echo $_SESSION['nombrealumno'];?> <?php echo $_SESSION['apellidosalumno'];?> </h4>	
            </div>
         </div>
       </div>
