@@ -56,10 +56,10 @@ class Classe
         try
         {
             $sql = "SELECT * FROM alumnos 
-            LEFT JOIN estatus on estatus.idestatus=alumnos.estatus_idestatus 
+            /*LEFT JOIN estatus on estatus.idestatus=alumnos.estatus_idestatus 
             LEFT JOIN tipodegrupo on tipodegrupo.idtipodegrupo=alumnos.id_tipo_alumno
             LEFT JOIN alumnos_tiene_grupos on alumnos_tiene_grupos.alumnos_idalumnos=alumnos.idalumnos
-            LEFT JOIN grupos on grupos.idgrupos=alumnos_tiene_grupos.grupos_idgrupos
+            LEFT JOIN grupos on grupos.idgrupos=alumnos_tiene_grupos.grupos_idgrupos*/
             ";
 
             if ($id != null) {
@@ -90,11 +90,11 @@ class Classe
     {
         try
         {
-            $sql = "  SELECT DISTINCT alumnos.*,grupos.*,tipodegrupo.* FROM alumnos 
-            LEFT JOIN estatus on estatus.idestatus=alumnos.estatus_idestatus 
+            $sql = "  SELECT * FROM alumnos 
+           /* LEFT JOIN estatus on estatus.idestatus=alumnos.estatus_idestatus 
             LEFT JOIN tipodegrupo on tipodegrupo.idtipodegrupo=alumnos.id_tipo_alumno
             LEFT JOIN alumnos_tiene_grupos on alumnos_tiene_grupos.alumnos_idalumnos=alumnos.idalumnos
-            LEFT JOIN grupos on grupos.idgrupos=alumnos_tiene_grupos.grupos_idgrupos
+            LEFT JOIN grupos on grupos.idgrupos=alumnos_tiene_grupos.grupos_idgrupos*/
           ";
 
             if ($id != null) {
@@ -220,6 +220,19 @@ class Classe
             print "Error: " . $e->getMessage();
         }
     }
+
+    public function del_detalle($id)
+    {
+        try {
+            $sql = "DELETE FROM alumnos_tiene_grupos WHERE iddetalle_a_g = ?";
+            $consulta = $this->con->prepare($sql);
+            $consulta->bindParam(1, $id);
+            $consulta->execute();
+            $this->con = null;
+        } catch (PDOException $e) {
+            print "Error: " . $e->getMessage();
+        }
+    }
     public function get_estatus()
     {
         try
@@ -298,7 +311,7 @@ class Classe
 
             $consulta->execute();
 
-//SI EXISTE EL USUARIO
+                 //SI EXISTE EL USUARIO
 
             if ($consulta->rowCount() == 1) {
                 return true;
@@ -328,6 +341,32 @@ class Classe
             } //fin else
         } catch (PDOExeption $e) {
             print "Error:" . $e->getmessage();
+        }
+    }
+
+    public function get_historial($id)
+    {
+        try {
+
+            $sql = "SELECT * FROM alumnos 
+            join alumnos_tiene_grupos on alumnos_tiene_grupos.alumnos_idalumnos=alumnos.idalumnos
+            join grupos on grupos.idgrupos=alumnos_tiene_grupos.grupos_idgrupos
+            join periodosescolares on periodosescolares.idperiodos=alumnos_tiene_grupos.periodosescolares_idperiodos
+            where idalumnos = ?";
+
+            $consulta = $this->con->prepare($sql);
+            $consulta->bindParam(1, $id);
+            $consulta->execute();
+
+
+            if ($consulta->rowCount() >= 1) {
+                return $consulta;
+
+            } else {
+                return $consulta;
+            }
+        } catch (PDOExeption $e) {
+            print "Error: " . $e->getMessage();
         }
     }
 } //cierra clase

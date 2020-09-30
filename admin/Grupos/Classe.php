@@ -231,7 +231,7 @@ class Classe
     {
         try
         {
-            $sql = " SELECT distinct nombrealumno,apellidosalumno,grupos_idgrupos from alumnos
+            $sql = " SELECT distinct alumnos.*,grupos_idgrupos from alumnos
             join alumnos_tiene_grupos on alumnos_tiene_grupos.alumnos_idalumnos=alumnos.idalumnos
             where grupos_idgrupos = ?  ";
             $consulta = $this->con->prepare($sql);

@@ -70,58 +70,137 @@ function printlayer(layer)
     <br>
     <div class="form-group">
             <img class="logo" src="../../front/img/logo.png"></img>
-        </div>
-<?php
-include_once '../menu/menu.php';
-?>
+    </div>
+		<?php
+		include_once '../menu/menu.php';
+		?>
 
-	</div><!--/.sidebar-->
-		
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
-		
-		
+	</div><!--/.sidebar-->		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">	
 		<div class="row">
 			<div class="col-lg-12">
 		 <input type="button" value="Imprimir" class="btn btn-info" onclick="window.print()">
 			</div>
-		</div><!--/.row-->
-				
+		</div><!--/.row-->			
 		
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">lista Grupo <b><?php echo $nombregrupo; ?></b></div>
-			 <div class="panel-body">
-			<table class="table">
-			<thead>
-			<th>Nombre</th>	            
-			</thead>
-			<tbody>
-            <?php
-            while($fila = $datos->fetchObject()){
-            ?>			
-			<tr>
-			<td style="width:250px;"> <i class="fa fa-graduation-cap" aria-hidden="true"></i> <?php echo $fila->nombrealumno; ?>  <?php echo $fila->apellidosalumno; ?></td>
-		    </tr>
-			
-		     <?php
-              }
-			 ?>
-			 </tbody>
-           </table>
-            </div>
+			         <div class="panel-body">
+
+			     <table data-toggle="table"   data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+					 <thead>
+						<th>Nombre</th>	            
+					</thead>
+					<tbody>
+					<?php
+					while($fila = $datos->fetchObject()){
+					?>			
+					   <tr>
+						<td style="width:250px;"><a href="#" data-toggle="modal" data-target="#<?php echo $fila->idalumnos; ?>"> <i class="fa fa-graduation-cap" aria-hidden="true"></i></a> <?php echo $fila->nombrealumno; ?>  <?php echo $fila->apellidosalumno; ?></td>
+					  </tr>	
+					         <!--Historial-->
+					         <div class="modal fade" id="<?php echo $fila->idalumnos; ?>" tabindex="-1" role="dialog" aria-labelledby="Alumno">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">                                  
+                                          <div class="modal-header">
+                                          <a  class="modal-title" style="color:black" ><?php echo $fila->nombrealumno; echo $fila->apellidosalumno; ?></a>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>                                          
+                                          </div>                                          
+                                            <div class="modal-body">
+											<ul class="list-group">
+
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											     Nº DE MATRÍCULA:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->matricula; ?></span>
+											</li>
+
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											    APELLIDOS:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->apellidosalumno; ?> </span>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											     NOMBRES:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->nombrealumno; ?> </span>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											    Nº DE CÉDULA:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->cedulaalumno; ?> </span>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											    Nº CARNET DEL CONADIS:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->carnetconadis; ?></span>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											     DISCAPACIDAD:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->discapacidad; ?></span>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											    PORCENTAJE DE DISCAPACIDAD:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->porcentajediscapacidad; ?></span>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+											    REPRESENTANTE LEGAL:
+												<span class="badge badge-primary badge-pill" style="background:White; color:black"><?php echo $fila->representante; ?></span>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span class="title" style="">Nº CÉDULA:</span>
+                                                <span class="badge badge-primary badge-pill" style="background:White; color:black"> <?php echo $fila->cedularepresentante; ?> </span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                DIRECCIÓN DEL DOMICILIO:                                                
+                                                <span class="badge badge-primary badge-pill" style="background:White; color:black"> <?php echo $fila->domicilio; ?> </span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            TELÉFONO CONVENCIONAL:                                                
+                                                <span class="badge badge-primary badge-pill" style="background:White; color:black"> <?php echo $fila->tlfconvencional; ?> </span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                TELÉFONO CELULAR:                                                
+                                                <span class="badge badge-primary badge-pill" style="background:White; color:black"> <?php echo $fila->tlfcelular; ?> </span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                CORREO ELECTRÓNICO:                                                
+                                                <span class="badge badge-primary badge-pill" style="background:White; color:black"> <?php echo $fila->email; ?> </span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                CÓDIGO DE LUZ:                                                
+                                                <span class="badge badge-primary badge-pill" style="background:White; color:black"> <?php echo $fila->codigoluz; ?> </span>
+                                            </li>
+											</ul>
+                                     
+
+
+                                           
+
+											</div>
+                                        </div>
+                                      </div>
+                                </div>
+                            <!--Historial-->
+					  		
+					<?php
+					}
+					?>
+					</tbody>
+				 </table>
+
+                  </div>
+			   </div>
 			</div>
-			</div>
-		    </div><!--/.row-->
+		</div><!--/.row-->
 		
 		
 	</div><!--/.main-->
 	<script src="../js/jquery-1.11.1.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/chart.min.js"></script>
-	<script src="../js/chart-data.js"></script>
-	<script src="../js/easypiechart.js"></script>
-	<script src="../js/easypiechart-data.js"></script>
 	<script src="../js/bootstrap-datepicker.js"></script>
 	<script src="../js/bootstrap-table.js"></script>
 	<script>

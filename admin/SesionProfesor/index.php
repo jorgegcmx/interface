@@ -7,9 +7,8 @@ if (!isset($_SESSION['cedula'])) {
 
 include_once 'classe.php';
 $usu1 = new classe();
-
+$idprofesores = $_SESSION['idprofesores'];
 $cedula = $_SESSION['cedula'];
-
 $datos = $usu1->get_grup($cedula);
 
 ?>
@@ -27,6 +26,7 @@ $datos = $usu1->get_grup($cedula);
   <link href="../css/datepicker3.css" rel="stylesheet">
   <link href="../css/bootstrap-table.css" rel="stylesheet">
   <link href="../css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <!--Icons-->
   <script src="../js/lumino.glyphs.js"></script>
@@ -50,7 +50,7 @@ $datos = $usu1->get_grup($cedula);
             <a href="../../Login/logout.php"><svg class="glyph stroked cancel" <?php echo $_SESSION['cedula']; ?>>
                 <use xlink:href="#stroked-cancel"></use>
               </svg>Cerrar Sesion</a>
-            <ul class="dropdown-menu" role="menu">
+             <ul class="dropdown-menu" role="menu">
               <li></li>
             </ul>
           </li>
@@ -85,7 +85,8 @@ $datos = $usu1->get_grup($cedula);
               <thead>
                 <tr>
                   <th>Tus Grupos</th>
-                  <th>Opciones</th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -102,10 +103,32 @@ $datos = $usu1->get_grup($cedula);
                          echo "$fila->grupo";
                         echo "_de_$fila->fechainicio";
                         echo "_a_$fila->fechatermino"; ?>" name="grupo">
-                      <button type="submit" class="btn btn-primary">Mostar Alumnos</button>
+                      <button type="submit" class="btn btn-primary"> <i class="fa fa-eye"></i> Calificar Alumnos</button>
                     </form>
                   </td>
-                </tr>
+                  <td> 
+                     <form class="form-inline" action="notas.php" method="GET">
+                      <div class="form-group mb-2">
+                      <input type="hidden" value="<?php echo $cedula; ?>" name="idprofesor">
+                      <input type="hidden" value="<?php echo $fila->idgrupos; ?>" name="id">
+                      <input type="hidden" value="<?php echo $fila->grupo;?>" name="grupo">
+                           </div>
+                           <div class="form-group mx-sm-3 mb-2">
+                           <select name="periodosescolares_idperiodos" required class="form-control">
+                           <option value=""></option>
+                           <?php
+				                       $estatus = new Classe();
+				                       $filass = $estatus->get_periodos();
+				                        while($data=$filass->fetchObject()){ ?>
+                           <option value="<?php echo $data->idperiodos; ?>">
+                             <?php echo "$data->periodoescolar"; echo "_$data->anio";?></option>
+                           <?php } ?>
+                          </select>
+                          </div>
+                          <button type="submit" class="btn btn-primary"><i class="fa fa-eye"></i > Ver Calificaciones</button>
+                        </form>
+                   </td>
+                 </tr>
                 <?php
                     }
                 ?>
@@ -115,86 +138,81 @@ $datos = $usu1->get_grup($cedula);
         </div>
       </div>
 
+
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">Apartado para agregar la Calificación</div>
           <div class="panel-body">
-
-<form role="form" action="agregar.php" method="POST">
-<?php
-include_once 'Classe.php';
-$usu = new Classe();
-
-if (isset($_GET['id']) and isset($_GET['grupo'])) {
-    $id = $_GET['id'];
-    $grupo = $_GET['grupo'];
-    echo "<label>Grupo</label>
-	 <input value='" . $id . "' class='form-control' type='hidden' readonly='readonly' name='grupos_idgrupos' required >
-	 <input value='" . $grupo . "' class='form-control' type='text' readonly='readonly'  required >";
-    $alumno = $usu->get_alum($id);
-    echo "<div class='form-group'>";
-    echo "<label>Alumnos</label>
-          <select class='form-control' name='alumnos_idalumnos' required>";
-    echo "<option value''></option>";
-    while ($filas = $alumno->fetchObject()) {
-        $idgrupos = $filas->idgrupos;
-        echo "<option value='" . $filas->idalumnos . "'>" . $filas->nombrealumno . " " . $filas->apellidosalumno . "</option>";
-    }
-    echo "<select>";
-	echo "</div>";
-/************************************************************** */
-	echo "<div class='form-group'>";
-	echo "<label>	Materia</label>
-	<select class='form-control' name='materias_idmaterias' required>";	
-	include_once 'classe.php';
-	$mat = new classe();	
-	$cedula = $_SESSION['cedula'];	
-	$datoss = $mat->get_mat($cedula, $idgrupos);
-	echo "<option value''></option>";	
-	while ($filass = $datoss->fetchObject()) {	
-		echo "<option value='" . $filass->idmaterias . "'>" . $filass->materia . "</option>";	}
-	echo "<select>";	
-	echo "</div>";
-
-	?>
-
-              <div class="form-group">
-                <label>Calificación</label>
-                <input class="form-control" name="calificacion" type="number" step="any" required>
-              </div>
-              <div class="form-group">
-                <label>Parcial</label>
-                <select name="parcial_idparcial" required class="form-control">
-                  <option value=""></option>
-                  <?php
-                $parcial = new Classe();
-                $fil = $parcial->get_parcial();
-                 while ($dat = $fil->fetchObject()) {?>
-                  <option value="<?php echo $dat->idparcial; ?>"><?php echo "$dat->parcialcol"; ?></option>
-                  <?php }?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Selecciona el Quimestre</label>
-                <select name="periodosescolares_idperiodos" required class="form-control">
-                  <option value=""></option>
-                  <?php
-				              $estatus = new Classe();
-				              $filass = $estatus->get_periodos();
-				               while($data=$filass->fetchObject()){ ?>
-                  <option value="<?php echo $data->idperiodos; ?>">
-                    <?php echo "$data->periodoescolar"; echo "_$data->anio";?></option>
-                  <?php } ?>
-                </select>
-              </div>
-
-              <button type="submit" class="btn btn-primary">Guardar</button>
-</form>
-
-<?php
-}
-?>
-
+                    <form role="form" action="agregar.php" method="POST">
+                    <?php
+                    include_once 'Classe.php';
+                    $usu = new Classe();
+                          if (isset($_GET['id']) and isset($_GET['grupo'])) {
+                              $id = $_GET['id'];
+                              $grupo = $_GET['grupo'];
+                              echo "<label>Grupo</label>
+                              <input value='" . $id . "' class='form-control' type='hidden' readonly='readonly' name='grupos_idgrupos' required >
+                              <input value='" . $grupo . "' class='form-control' type='text' readonly='readonly'  required >";
+                              $alumno = $usu->get_alum($id);
+                              echo "<div class='form-group'>";
+                              echo "<label>Alumnos</label>
+                                    <select class='form-control' name='alumnos_idalumnos' required>";
+                              echo "<option value''></option>";
+                              while ($filas = $alumno->fetchObject()) {
+                                  $idgrupos = $filas->idgrupos;
+                                  echo "<option value='" . $filas->idalumnos . "'>" . $filas->nombrealumno . " " . $filas->apellidosalumno . "</option>";
+                              }
+                              echo "<select>";
+                              echo "</div>";
+                              /************************************************************** */
+                              echo "<div class='form-group'>";
+                              echo "<label>	Materia</label>
+                              <select class='form-control' name='materias_idmaterias' required>";	
+                              include_once 'classe.php';
+                              $mat = new classe();	
+                              $cedula = $_SESSION['cedula'];	
+                              $datoss = $mat->get_mat($cedula, $idgrupos);
+                              echo "<option value''></option>";	
+                              while ($filass = $datoss->fetchObject()) {	
+                                echo "<option value='" . $filass->idmaterias . "'>" . $filass->materia . "</option>";	
+                              }
+                              echo "<select>";	
+                              echo "</div>";
+                             ?>
+                            <div class="form-group">
+                              <label>Calificación</label>
+                              <input class="form-control" name="calificacion" type="number" step="any" required>
+                            </div>
+                            <div class="form-group">
+                              <label>Parcial</label>
+                              <select name="parcial_idparcial" required class="form-control">
+                                <option value=""></option>
+                                <?php
+                                 $parcial = new Classe();
+                                 $fil = $parcial->get_parcial();
+                                 while ($dat = $fil->fetchObject()) {?>
+                                <option value="<?php echo $dat->idparcial; ?>"><?php echo "$dat->parcialcol"; ?></option>
+                                <?php }?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label>Selecciona el Quimestre</label>
+                              <select name="periodosescolares_idperiodos" required class="form-control">
+                                <option value=""></option>
+                                <?php
+                                    $estatus = new Classe();
+                                    $filass = $estatus->get_periodos();
+                                    while($data=$filass->fetchObject()){ ?>
+                                <option value="<?php echo $data->idperiodos; ?>">
+                                  <?php echo "$data->periodoescolar"; echo "_$data->anio";?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                        <?php
+                        }
+                        ?>
           </div>
         </div>
       </div>

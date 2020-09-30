@@ -78,8 +78,8 @@ function printlayer(layer){
              <div align="center">
 	            <button type="button" class="btn btn-info"  onclick="window.print()"><i class="fa fa-print" aria-hidden="true"></i> Imprimir Boleta</button>
             </div>
-                     <h4>	Matricula: <?php echo $_GET['matricula']; ?>  </h4>
-		              <h4> Alumno: <?php echo $_GET['nombre'];?> </h4>	
+                     <h3>	Matricula: <?php echo $_GET['matricula']; ?>  </h3>
+		              <h3> Alumno: <?php echo $_GET['nombre'];?> </h3>	
            </div>
         </div>
       </div>
@@ -101,9 +101,9 @@ function printlayer(layer){
    $cicl=$ciclo->get_ciclo($matricula);
    while($ci = $cicl->fetchObject()){ 
     ?>
-			<div class="col-lg-5">
+			<div class="col-lg-12">
 				<div class="panel panel-default">	
- 	       	<div class="panel-body">   
+ 	       	<div class="panel-body" align="center">   
                 <?php        
                  $ci->idperiodos;
                  echo "<h6>".$ci->periodoescolar." DEL AÑO ".$ci->anio."</h6>";
@@ -113,7 +113,7 @@ function printlayer(layer){
                  ?>
                  <b><?php echo $g->grupo;  ?></b>
                  
-                  <table>
+                  <table class="table">
                   <?php
                   $SUMA_PROMEDIO=0;
                   $items_asignaturas=0;
@@ -122,24 +122,24 @@ function printlayer(layer){
                   ?>
                     <!---------------------------------HEADER DE LA TABLA------------------------------------->                
                    <tr>
-                     <th style="font-size: x-small;"><small>ASIGNATURAS</small></th>
+                     <th ><small>ASIGNATURAS</small></th>
                       <?php  
                       $parcial = new CalsseCalificaciones();
                       $par=$parcial->get_parcial(null);
                        while($p = $par->fetchObject()){  
                       ?>
-                     <th style="text-align:center; font-size: x-small;"><small><?php echo $p->parcialcol; ?></small></th>
+                     <th style="text-align:center;"><small><?php echo $p->parcialcol; ?></small></th>
                       <?php  } ?>
-                     <th style="text-align:center; font-size: x-small;"> <small>PROMEDIO 80%</small></th>
+                     <th style="text-align:center;"> <small>PROMEDIO 80%</small></th>
                      <?php 
                       $examen = new CalsseCalificaciones();
                       $exa=$examen->get_examen(null);
                        while($e = $exa->fetchObject()){  
                       ?>
-                       <th style="text-align:center; font-size: x-small;"><small><?php echo $e->parcialcol; ?></small></th>
+                       <th style="text-align:center; "><small><?php echo $e->parcialcol; ?></small></th>
                       <?php  } ?> 
-                      <th style="text-align:center; font-size: x-small;"><small>PROMEDIO EXAMEN 20%</small></th>
-                      <th style="text-align:center; font-size: x-small;"><small>PROMEDIO</small></th>
+                      <th style="text-align:center; "><small>PROMEDIO EXAMEN 20%</small></th>
+                      <th style="text-align:center; "><small>PROMEDIO</small></th>
                      </tr>
                      <!----------------------------------------------------------------------------------->
                      <!---------------------------------DETALLE------------------------------------->
@@ -160,7 +160,7 @@ function printlayer(layer){
                       $verificamateria= $verificamateria+1;
                       ?>
                      <tr>
-                     <td style="font-size: x-small;"><small><?php echo $fila->materia;  ?></small> </td>
+                     <td ><small><?php echo $fila->materia;  ?></small> </td>
                      <?php                      
                      $parcia = new CalsseCalificaciones();
                      $pa=$parcia->get_parcial(null);
@@ -307,64 +307,60 @@ function printlayer(layer){
 </div>
 <?php   }   ?>
 
-<div class="col-lg-2">
+<div class="col-lg-12" align="center">
 		<div class="panel panel-default">	
  	     <div class="panel-body">
         <h6>PROMEDIO TOTAL QUIMESTRE</h6>
         <b>Inicial</b>
-      <table> 
-      <tr>
-      <th style="font-size: x-small;">------ -------------</th>
-      </tr>
-       
+        <table  class="table">      
       <?php  if( $Gene1!=0){?>
-        <tr>
-          <th> <?php echo $Gene1/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene1/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene2!=0){?>
-        <tr>
-          <th> <?php echo $Gene2/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene2/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene3!=0){?>
-        <tr>
-          <th> <?php echo $Gene3/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene3/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene4!=0){?>
-        <tr>
-          <th> <?php echo $Gene4/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene4/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene5!=0){?>
-        <tr>
-          <th> <?php echo $Gene5/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene5/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene6!=0){?>
-        <tr>
-          <th> <?php echo $Gene6/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene6/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene7!=0){?>
-        <tr>
-          <th> <?php echo $Gene7/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene7/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene8!=0){?>
-        <tr>
-          <th> <?php echo $Gene8/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene8/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene9!=0){?>
-        <tr>
-          <th> <?php echo $Gene9/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene9/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene10!=0){?>
-        <tr>
-          <th> <?php echo $Gene10/2; ?></th>
+        <tr style="text-align:center; font-weight:bold;">
+          <td> <?php echo $Gene10/2; ?></td>
         </tr>
       <?php } ?>         
    </table>

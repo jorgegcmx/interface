@@ -116,17 +116,16 @@ if (isset($_GET['id'])) {
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <a href="formmaterias.php?id=<?php echo $fila->idgrupos; ?>&idtipo=<?php echo $_GET['id'] ?>"  > Agregar materias y asignar profesor</a>
-                                                  <span class="badge badge-primary badge-pill"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                                                  <span class="badge badge-primary badge-pill" style="background:White; color:black"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <a href="lista.php?idgrupo=<?php echo $fila->idgrupos; ?>&nombregrupo=<?php echo $fila->grupo; ?>"  > Lista de alumnos registrados</a>
-                                                  <span class="badge badge-primary badge-pill"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                                  <span class="badge badge-primary badge-pill" style="background:White; color:black"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                                 </li>
                                               </ul>											
 											</div>
                                           </div>
                                            <div class="modal-body">
-
                                                 <table class="table">
                                                  <thead>
                                                    <tr>
@@ -147,9 +146,7 @@ if (isset($_GET['id'])) {
 													 <td><a href="borrar_detalle_maetria_profesor.php?id=<?php echo $filas->iddetalle_p_m; ?>"  id="confirmacion"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>    
                                                    </tr>
                                                	<?php }?>
-                                               	</table>    
-												 
-												
+                                               	</table> 											
                                             </div>
                                         </div>
                                       </div>

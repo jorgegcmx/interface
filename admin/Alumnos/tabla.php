@@ -95,8 +95,6 @@ if (isset($_GET['id'])) {
 						    <thead>
 						    <tr>
 							    <th></th>
-
-
 						    </tr>
 						    </thead>
 							 <tbody>
@@ -106,10 +104,13 @@ if (isset($_GET['id'])) {
                               ?>
                                     <tr>
                                         <td>
-                                        <div class="card-view">
-                                                <span class="title" style="">TIPO:</span>
-                                                <span class="value"> <?php echo $fila->tipodegrupo; ?> </span>
+                                            <div class="card-view">
+                                                <span class="title" style=""></span>
+                                                <span><a href="#" data-toggle="modal" data-target="#<?php echo $fila->idalumnos; ?>" class="btn btn-primary btn-xs ask"  ><i class="fa fa-eye"></i > Historial</a></span>
+                                            
+                                            
                                             </div>
+                                       
                                             <div class="card-view">
                                                 <span class="title" style="">Nº DE MATRÍCULA:</span>
                                                 <span class="value"> <?php echo $fila->matricula; ?> </span>
@@ -123,11 +124,6 @@ if (isset($_GET['id'])) {
                                             <div class="card-view">
                                                 <span class="title" style="">NOMBRES:</span>
                                                 <span class="value"><?php echo $fila->nombrealumno; ?> </span>
-                                            </div>
-
-                                            <div class="card-view">
-                                                <span class="title" style="">AÑO DE E.G.B:</span>
-                                                <span class="value"><?php  if($fila->grupo==null){echo"<a  class='btn btn-danger' >No se ha asignado grupo</a>";}else{echo "<b>". $fila->grupo."</b>";} ?> </span>
                                             </div>
 
                                             <div class="card-view">
@@ -205,6 +201,11 @@ if (isset($_GET['id'])) {
                                             <div class="card-view">
                                                 <span class="title" style=""></span>
                                                 <span><a href="form.php?id=<?php echo $fila->idalumnos; ?> " class="btn btn-info btn-xs"> <i class="fa fa-pencil"></i> Editar</a></span>
+                                            </div>                                            
+
+                                            <div class="card-view">
+                                                <span class="title" style=""></span>
+                                                <span><a href="notas.php?id=<?php echo $fila->idalumnos; ?>&matricula=<?php echo $fila->matricula; ?>&nombre=<?php echo $fila->nombrealumno.''. $fila->apellidosalumno; ?>" class="btn btn-info btn-xs" ><i class="fa fa-eye"></i > Notas</a></span>
                                             </div>
 
                                             <div class="card-view">
@@ -212,21 +213,45 @@ if (isset($_GET['id'])) {
                                                 <span><a href="borrar.php?id=<?php echo $fila->idalumnos; ?>" class="btn btn-danger btn-xs ask" id="confirmacion" ><i class="fa fa-trash-o"></i > Borrar</a></span>
                                             </div>
 
-                                            <div class="card-view">
-                                                <span class="title" style=""></span>
-                                                <span><a href="notas.php?id=<?php echo $fila->idalumnos; ?>&matricula=<?php echo $fila->matricula; ?>&nombre=<?php echo $fila->nombrealumno.''. $fila->apellidosalumno; ?>" class="btn btn-info btn-xs" ><i class="fa fa-eye"></i > Notas</a></span>
-                                            </div>
-
-                                        </td>
+                                        </td>                                
                                     </tr>
-                                    <?php
-}
-?>
 
+                                        <!--Historial-->
+                                    <div class="modal fade" id="<?php echo $fila->idalumnos; ?>" tabindex="-1" role="dialog" aria-labelledby="Alumno">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">                                  
+                                          <div class="modal-header">
+                                          <a  class="modal-title" style="color:black" ><?php echo $fila->nombrealumno; echo $fila->apellidosalumno; ?></a>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>                                          
+                                          </div>                                          
+                                            <div class="modal-body">
+                                               <ul class="list-group">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <a  class="modal-title" style="color:black" ></a>    
+                                                </li>
+                                                <?php
+                                                  $grupos = new Classe();
+                                                  $grupo = $grupos->get_historial($fila->idalumnos);
+                                                   while ($fil = $grupo->fetchObject()) {
+                                                  ?>                                                 
+                                                     <li class="list-group-item d-flex justify-content-between align-items-center"><b>GRUPO: <?php echo $fil->grupo; ?> </b><?php echo $fil->periodoescolar; echo $fil->anio; ?> <a href="borrar_detalle.php?id=<?php echo $fil->iddetalle_a_g; ?>"  id="confirmacion"> <i class="fa fa-trash" aria-hidden="true"></i></a> </li>
+                                                                                           
+                                               	<?php }?>
+                                                </ul>                                             
+                                         
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Historial-->
+                                    
+                                <?php
+                                }
+                                ?>
 
-         </tbody>
-
-		</table>
+                        </tbody>
+                        </table>
 
 					</div>
 				</div>
