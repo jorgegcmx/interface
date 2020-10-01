@@ -105,7 +105,7 @@ function printlayer(layer)
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">                                  
                                           <div class="modal-header">
-                                          <a  class="modal-title" style="color:black" ><?php echo $fila->nombrealumno; echo $fila->apellidosalumno; ?></a>
+                                          <a  class="modal-title" style="color:black" ><?php echo $fila->nombrealumno." ".$fila->apellidosalumno; ?></a>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                 aria-hidden="true">&times;</span></button>                                          
                                           </div>                                          

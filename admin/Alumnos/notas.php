@@ -155,6 +155,17 @@ function printlayer(layer){
                       $pro8=0;
                       $pro9=0;
                       $pro10=0;
+
+                      $mat1="";
+                      $mat2="";
+                      $mat3="";
+                      $mat4="";
+                      $mat5="";
+                      $mat6="";
+                      $mat7="";
+                      $mat8="";
+                      $mat9="";
+                      $mat10="";
                      
                       while($fila = $datos->fetchObject()){
                       $verificamateria= $verificamateria+1;
@@ -239,37 +250,48 @@ function printlayer(layer){
                             $SUMA_PROMEDIO=$SUMA_PROMEDIO+($EXAMEN*0.20 + $PROMEDIOpARCIAL);
                              echo ($EXAMEN*0.20 + $PROMEDIOpARCIAL);                         
                             
-                             if($verificamateria==1){
+                           if($verificamateria==1){
                                 $pro1=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                                $mat1=$fila->materia;
                              }
                              if($verificamateria==2){
                                 $pro2=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                                $mat2=$fila->materia;
                              }
                              if($verificamateria==3){
                                 $pro3=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                                $mat3=$fila->materia;
                              }
                              if($verificamateria==4){
                                 $pro4=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                                $mat4=$fila->materia;
                              }
                              if($verificamateria==5){
                                 $pro5=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                                $mat5=$fila->materia;
                              }
                              if($verificamateria==6){
                                 $pro6=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                                $mat6=$fila->materia;
                              }
                              if($verificamateria==7){
                                $pro7=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                               $mat7=$fila->materia;
                              }
                              if($verificamateria==8){
                                 $pro8=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                                $mat8=$fila->materia;
                              }
                              if($verificamateria==9){
                                $pro9=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                               $mat9=$fila->materia;
                              }
                              if($verificamateria==10){
                                $pro10=($EXAMEN*0.20 + $PROMEDIOpARCIAL);
+                               $mat10=$fila->materia;
                              }                             
-                             ?>                          
+                             ?>                               
+                                                     
                           </td>                         
                         <?php  } ?>
                        </tr>
@@ -311,59 +333,61 @@ function printlayer(layer){
 		<div class="panel panel-default">	
  	     <div class="panel-body">
         <h6>PROMEDIO TOTAL QUIMESTRE</h6>
-        <b>Inicial</b>
+        <b>Inicial</b>  
         <table  class="table">      
       <?php  if( $Gene1!=0){?>
-        <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene1/2; ?></td>
+        <tr style="text-align:center; font-weight:bold;">         
+          <td><?php echo $mat1;  ?>= <?php echo $Gene1/2; ?></td>         
         </tr>
       <?php } ?>
       <?php  if( $Gene2!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene2/2; ?></td>
+          <td><?php echo $mat2;  ?>= <?php echo $Gene2/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene3!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene3/2; ?></td>
+          <td><?php echo $mat3;  ?>= <?php echo $Gene3/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene4!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene4/2; ?></td>
+          <td><?php echo $mat4;  ?>= <?php echo $Gene4/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene5!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene5/2; ?></td>
+          <td><?php echo $mat5;  ?>= <?php echo $Gene5/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene6!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene6/2; ?></td>
+          <td><?php echo $mat6;  ?>= <?php echo $Gene6/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene7!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene7/2; ?></td>
+          <td><?php echo $mat7;  ?>=( <?php echo $Gene7/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene8!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene8/2; ?></td>
+          <td><?php echo $mat8;  ?>= <?php echo $Gene8/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene9!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene9/2; ?></td>
+          <td><?php echo $mat9;  ?>= <?php echo $Gene9/2; ?></td>
         </tr>
       <?php } ?>
       <?php  if( $Gene10!=0){?>
         <tr style="text-align:center; font-weight:bold;">
-          <td> <?php echo $Gene10/2; ?></td>
+          <td><?php echo $mat10;  ?>= <?php echo $Gene10/2; ?></td>
         </tr>
       <?php } ?>         
    </table>
+
+     
 	</div>
 	</div>
 	</div>

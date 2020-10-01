@@ -102,7 +102,7 @@ $periodosescolares_idperiodos = $_GET['periodosescolares_idperiodos'];
                  while ($fila = $datos->fetchObject()) {                    
                  ?>
                   <tr>
-                    <td><b><?php echo $fila->nombrealumno."".$fila->apellidosalumno; ?></b></td>
+                    <td><b><?php echo $fila->nombrealumno." ".$fila->apellidosalumno; ?></b></td>
                     <?php
                         $parcial = new Classe();
                         $fil = $parcial->get_parcial();
