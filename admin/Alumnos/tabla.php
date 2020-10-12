@@ -195,7 +195,9 @@ if (isset($_GET['id'])) {
 
                                             <div class="card-view">
                                                 <span class="title" style=""></span>
-                                                <span><a href="archivos/archivo.pdf" class="btn btn-success btn-md" target="_BLANK"> <i ></i>Carta de Compromiso</a></span>
+                                                <span><a href="#" data-toggle="modal" data-target="#archivo<?php echo $fila->idalumnos; ?>" class="btn btn-success btn-xs ask"  ><i class="fa fa-eye"></i > Carta de Compromiso</a></span>
+                                                <!--span><a href="archivos/archivo.pdf" class="btn btn-success btn-md" target="_BLANK"> <i ></i>Carta de Compromiso</a></span-->                                                                                             
+
                                             </div>
 
                                             <div class="card-view">
@@ -238,8 +240,47 @@ if (isset($_GET['id'])) {
                                                      <li class="list-group-item d-flex justify-content-between align-items-center"><b>GRUPO: <?php echo $fil->grupo; ?> </b><?php echo $fil->periodoescolar; echo $fil->anio; ?> <a href="borrar_detalle.php?id=<?php echo $fil->iddetalle_a_g; ?>"  id="confirmacion"> <i class="fa fa-trash" aria-hidden="true"></i></a> </li>
                                                                                            
                                                	<?php }?>
-                                                </ul>                                             
-                                         
+                                                </ul>                                         
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Historial-->
+
+                                     <!--Historial-->
+                                     <div class="modal fade" id="archivo<?php echo $fila->idalumnos; ?>" tabindex="-1" role="dialog" aria-labelledby="Alumno">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">                                  
+                                          <div class="modal-header">
+                                          <a  class="modal-title" style="color:black" ><?php echo $fila->nombrealumno; echo $fila->apellidosalumno; ?></a>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>                                          
+                                          </div>                                          
+                                            <div class="modal-body">
+                                            <form role="form" method="POST" action="../Alumnos/agregarfile.php" enctype="multipart/form-data">
+                                                   <input type="hidden" name="matricula" value="<?php echo $fila->matricula; ?> " class="form-control"  >
+                                                   <input type="hidden" name="id_alumno" value="<?php echo $fila->idalumnos; ?> " class="form-control"  >
+                                                   <div class="form-group">
+                                                    <label>Archivo</label>
+                                                    <input type="file" name="archivo" class="form-control"  required>
+                                                </div>
+                                                <button type="submit" value="subir" name="subir" class="btn btn-primary btn-xs">Agregar</button>
+                                                </form>
+                                                 <br>
+                                                 <br>
+                                                <ul class="list-group">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <a  class="modal-title" style="color:black" ></a>    
+                                                </li>
+                                                <?php
+                                                  $cartas = new Classe();
+                                                  $carta = $cartas->get_cartas($fila->idalumnos);
+                                                   while ($car = $carta->fetchObject()) {
+                                                  ?>                                                 
+                                                     <li class="list-group-item d-flex justify-content-between align-items-center"><a href="<?php echo $car->ruta; ?>">Cartas: <?php echo $car->ruta; ?> </a> </li>
+                                                                    
+                                               	<?php }?>
+                                                </ul> 
                                             </div>
                                         </div>
                                       </div>

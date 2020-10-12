@@ -22,11 +22,81 @@ class Classe
     private $codigoluz;
     private $estatus_idestatus; 
     private $id_tipo_alumno;
+    ////////////////////////
+    private $idcartas;
+    private $id_alumnos;
+    private $ruta;
+
 
     public function __construct()
     {
         $this->con = Conexion::singleton_conexion();
     }
+////////////////////////////
+    public function set_file($idcartas, $id_alumnos, $ruta) {
+    $this->idcartas = $idcartas;
+    $this->id_alumnos = $id_alumnos;
+    $this->ruta = $ruta;
+    }
+
+    public function add_file()
+        {
+            try {
+                if ($this->idcartas == null) {
+                    $sql = "INSERT INTO cartas VALUES(0,?,?)";
+
+                } else {
+                    $sql = "UPDATE  cartas"
+                        . " SET id_alumnos = ?,"
+                        . " ruta = ?"                   
+                        . " WHERE idcartas =?";
+                }            
+
+                $consulta = $this->con->prepare($sql);
+                $consulta->bindparam(1, $this->id_alumnos);
+                $consulta->bindparam(2, $this->ruta);           
+
+                if ($this->idcartas != null) {
+                    $consulta->bindparam(3, $this->idcartas);
+                }
+                $consulta->execute();
+                return $sql;
+                $this->con = null;
+
+            } catch (PDOEception $ex) {
+                print "Error:" . $e->getMessage();
+            }
+        }
+        public function get_cartas($id = null)
+        {
+            try
+            {
+                $sql = "SELECT * FROM cartas ";
+    
+                if ($id != null) {
+                    $sql .= " WHERE id_alumnos =?";
+    
+                }
+    
+                $consulta = $this->con->prepare($sql);
+    
+                if ($id != null) {
+                    $consulta->bindParam(1, $id);
+                }
+                $consulta->execute();
+                $this->con = null;
+    
+                if ($consulta->rowCount() > 0) {
+                    return $consulta;
+                } else {
+                    return $consulta;
+                } //fin else
+            } catch (PDOExeption $e) {
+                print "Error:" . $e->getmessage();
+            }
+        }
+
+///////////////////////////////////
 
     public function set_alum($id, $matricula, $apellidosalumno, $nombresalumnos, $password, $cedulaalumno, $carnetconadis, $discapacidad, $porcentajediscapacidad,
         $representante, $cedularepresentante, $domicilio, $tlfconvencional, $tlfcelular, $email, $codigoluz,$estatus_idestatus,$id_tipo_alumno) {
