@@ -25,7 +25,7 @@ class Usuario
     public function login_user($cedula, $contrasena)
     {
         try {
-            $sql = "SELECT * FROM profesores WHERE cedula = ? and password= ?";
+            $sql = "SELECT * FROM profesores WHERE cedula = ? and password= md5(?)";
             $consulta = $this->con->prepare($sql);
             $consulta->bindParam(1, $cedula);
             $consulta->bindParam(2, $contrasena);

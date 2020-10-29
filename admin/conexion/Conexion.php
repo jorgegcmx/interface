@@ -11,6 +11,7 @@ private function __construct()
     
    $this->con = new PDO("mysql:host=localhost;dbname=sis_escolar",'root','');
    //$this->con = new PDO("mysql:host=localhost;dbname=u265303828_bdescolar",'u265303828_bdescolar','Scorpions.,,1');
+   //$this->con = new PDO("mysql:host=localhost;dbname=ueecngco_sisescolar",'ueecngco_sisescolar','?Kxk}62js2(@');
         
     $this->con->exec("SET CHARSET SET UTF-8");    
     }

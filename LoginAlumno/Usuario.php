@@ -30,7 +30,7 @@ class Usuario
     public function login_user($usuario, $contrasena)
     {
         try {
-            $sql = "SELECT * FROM alumnos WHERE matricula = ? and password= ?";
+            $sql = "SELECT * FROM alumnos WHERE matricula = ? and password= md5(?)";
             $consulta = $this->con->prepare($sql);
             $consulta->bindParam(1, $usuario);
             $consulta->bindParam(2, $contrasena);

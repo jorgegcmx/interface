@@ -36,12 +36,17 @@ function printlayer(layer)
 	generator.document.write(layertext.innerHTML.replace("Print Me"));	
 	generator.document.close();
 	generator.print();
-	generator.close();
-	
+	generator.close();	
 }
 </script>
-</head>
+<style>
+  .inputstyle{    
+    text-align:center; 
+    font-weight:900; 
+    width:350px;  } 
+</style>
 
+</head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">

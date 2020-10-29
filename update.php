@@ -12,7 +12,10 @@ if (isset($_POST['id'])) {
     $password1 = trim($_POST['password1']);
     $password2 = trim($_POST['password2']);
 
-    if ($password1 == $password2) {      
+    if ($password1 == $password2) {
+
+         $password1 = md5($password1); 
+          
          $usu1->add_password($password1,$id);
          $usu2->add_password_profesor($password1,$id);
          $usu3->add_password_alumno($password1,$id);
